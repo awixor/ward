@@ -1,0 +1,16 @@
+[package]
+name = "ward"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.4", features = ["derive"] }
+regex = "1.10"
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+ignore = "0.4"
+globset = "0.4"
+colored = "2.1"
+
+anyhow = "1.0"
+thiserror = "1.0"
