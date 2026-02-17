@@ -22,7 +22,7 @@ pub struct CustomRule {
 }
 
 fn default_threshold() -> f32 {
-    3.8
+    4.5
 }
 
 impl Default for Config {
@@ -30,7 +30,7 @@ impl Default for Config {
         Self {
             exclude: vec!["*.lock".to_string(), "package-lock.json".to_string(), "yarn.lock".to_string()],
             skip_entropy_checks: vec!["*.min.js".to_string(), "*.svg".to_string()],
-            threshold: 3.8,
+            threshold: 4.5,
             rules: vec![],
         }
     }

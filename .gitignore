@@ -1,1 +1,10 @@
 /target
+/dist
+node_modules
+.DS_Store
+*.key
+*.pem
+.env
+ward.toml
+test_secrets.txt
+secret.txt

@@ -101,14 +101,22 @@ impl Scanner {
             if !skip_entropy {
                // Only check words/tokens > 20 chars
                for word in line.split_whitespace() {
-                   if word.len() > 20 {
-                        let entropy = shannon_entropy(word);
+                   // Clean common wrapping punctuation from the word
+                   let clean_word = word.trim_matches(|c| "()[]{}\";',".contains(c));
+                   
+                   if clean_word.len() > 20 {
+                        // Skip if it looks like code function calls or paths
+                        if clean_word.contains("::") || clean_word.contains("->") {
+                            continue;
+                        }
+
+                        let entropy = shannon_entropy(clean_word);
                         if entropy > self.config.threshold {
                              violations.push(Violation {
                                 file: path.to_path_buf(),
                                 line: line_idx,
                                 rule: format!("High Entropy ({:.2})", entropy),
-                                snippet: word.chars().take(20).collect(), // truncated
+                                snippet: clean_word.chars().take(20).collect(), // truncated
                             });
                         }
                    }
