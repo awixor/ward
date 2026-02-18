@@ -51,9 +51,19 @@ fn main() -> Result<()> {
             let mut all_violations = vec![];
 
             for file in files {
-                match scanner.scan_file(&file) {
-                    Ok(mut v) => all_violations.append(&mut v),
-                    Err(e) => eprintln!("Error scanning {:?}: {}", file, e),
+                // Fetch content from git index (staged)
+                match git::get_staged_content(&file) {
+                    Ok(content) => {
+                         match scanner.scan_content(&file, &content) {
+                            Ok(mut v) => all_violations.append(&mut v),
+                            Err(e) => eprintln!("Error scanning {:?}: {}", file, e),
+                        }
+                    },
+                    Err(_) => {
+                        // Binary file or deleted? specific patterns might cause this.
+                        // For now we skip, mirroring "safe defaults"
+                        // In future: verbose log
+                    }
                 }
             }
 

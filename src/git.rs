@@ -94,3 +94,26 @@ pub fn get_staged_files() -> Result<Vec<PathBuf>> {
 
     Ok(files)
 }
+
+pub fn get_staged_content(path: &Path) -> Result<String> {
+    // Use git show :path/to/file to get content from index
+    // Note: path must be relative to repo root, which get_staged_files returns
+    let path_str = path.to_str().context("Invalid path encoding")?;
+    
+    let output = Command::new("git")
+        .args(&["show", &format!(":{}", path_str)])
+        .output()
+        .context(format!("Failed to read staged content for {}", path_str))?;
+
+    if !output.status.success() {
+        // If file is deleted in index or error, we might get here. 
+        // For pre-commit diff-filter=ACM, it should exist.
+        // Fallback or error? Let's error for now to be safe.
+        return Err(anyhow::anyhow!("git show failed for {}", path_str));
+    }
+
+    let content = String::from_utf8(output.stdout)
+        .context("File content is not valid UTF-8 (binary?)")?;
+        
+    Ok(content)
+}

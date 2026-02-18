@@ -37,12 +37,24 @@ impl Default for Config {
 }
 
 pub fn load_config() -> Result<Config> {
-    let config_path = Path::new("ward.toml");
-    if config_path.exists() {
-        let content = fs::read_to_string(config_path).context("Failed to read ward.toml")?;
-        let config: Config = toml::from_str(&content).context("Failed to parse ward.toml")?;
-        Ok(config)
+    let mut config = if Path::new("ward.toml").exists() {
+        let content = fs::read_to_string("ward.toml").context("Failed to read ward.toml")?;
+        toml::from_str(&content).context("Failed to parse ward.toml")?
     } else {
-        Ok(Config::default())
+        Config::default()
+    };
+
+    // Load .wardignore if exists
+    let ignore_path = Path::new(".wardignore");
+    if ignore_path.exists() {
+        let content = fs::read_to_string(ignore_path).context("Failed to read .wardignore")?;
+        for line in content.lines() {
+            let line = line.trim();
+            if !line.is_empty() && !line.starts_with('#') {
+                config.exclude.push(line.to_string());
+            }
+        }
     }
+
+    Ok(config)
 }

@@ -1,7 +1,7 @@
 use crate::config::Config;
 use regex::Regex;
 use globset::{Glob, GlobSet, GlobSetBuilder};
-use std::fs;
+// use std::fs; // Removed unused import
 use std::path::{Path, PathBuf};
 use std::collections::HashMap;
 use anyhow::Result;
@@ -61,19 +61,12 @@ impl Scanner {
         Self { config, patterns, exclude_globnet }
     }
 
-    pub fn scan_file(&self, path: &Path) -> Result<Vec<Violation>> {
+    pub fn scan_content(&self, path: &Path, content: &str) -> Result<Vec<Violation>> {
         if self.exclude_globnet.is_match(path) {
             return Ok(vec![]);
         }
 
         let mut violations = vec![];
-        
-        // Skip binary check (basic)
-        // In a real impl, we'd read first 1024 bytes to check for nulls
-        let content = match fs::read_to_string(path) {
-            Ok(c) => c,
-            Err(_) => return Ok(vec![]), // Skip binary or unreadable
-        };
 
         for (i, line) in content.lines().enumerate() {
             let line_idx = i + 1;
