@@ -1,5 +1,5 @@
 {
-  "name": "ward",
+  "name": "git-ward",
   "version": "0.1.0",
   "description": "Local-First Git Guard for preventing secret leaks",
   "bin": {

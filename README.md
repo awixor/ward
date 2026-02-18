@@ -19,7 +19,7 @@
 
 ```bash
 # Initialize Ward in your current repository
-npx ward-cli init
+npx git-ward init
 ```
 
 ### From Source (Rust)
