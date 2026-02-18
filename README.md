@@ -4,14 +4,14 @@
 
 ## 🚀 Features
 
-- **Zero Friction:** Scans staged files in < 50ms.
+- **Zero Friction:** Scans _staged_ files in < 50ms (ignoring working directory changes).
 - **Privacy First:** All scanning happens locally. No data leaves your machine.
 - **Smart Detection:**
   - **Ethereum Private Keys**
   - **BIP-39 Mnemonics**
   - **Generic API Keys**
   - **High Entropy Strings** (with false positive filtering)
-- **Configurable:** Ignore specific files or patterns via `ward.toml`.
+- **Configurable:** Ignore specific files via `.wardignore` or `ward.toml`.
 
 ## 📦 Installation
 
@@ -74,6 +74,16 @@ threshold = 4.5
 [[rules]]
 name = "My Custom Token"
 regex = "MYTOKEN-[0-9]{5}"
+```
+
+### Using `.wardignore`
+
+You can also create a standard `.wardignore` file in your project root (works like `.gitignore`):
+
+```text
+secrets.txt
+generated/
+*.log
 ```
 
 ## License
