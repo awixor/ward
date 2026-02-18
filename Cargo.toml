@@ -2,9 +2,9 @@
 name = "ward"
 version = "0.1.0"
 edition = "2021"
-authors = ["Elhoucine Aouassar"]
+authors = ["awixor"]
 description = "Local-First Git Guard for preventing secret leaks"
-repository = "https://github.com/elhoucineaouassar/ward"
+repository = "https://github.com/awixor/ward"
 license = "MIT"
 keywords = ["git", "secret-scanning", "security", "cli"]
 readme = "README.md"

@@ -17,16 +17,16 @@
     "pre-commit",
     "ward"
   ],
-  "author": "Elhoucine Aouassar",
+  "author": "awixor",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elhoucineaouassar/ward.git"
+    "url": "git+https://github.com/awixor/ward.git"
   },
   "bugs": {
-    "url": "https://github.com/elhoucineaouassar/ward/issues"
+    "url": "https://github.com/awixor/ward/issues"
   },
-  "homepage": "https://github.com/elhoucineaouassar/ward#readme",
+  "homepage": "https://github.com/awixor/ward#readme",
   "files": [
     "bin",
     "src",
