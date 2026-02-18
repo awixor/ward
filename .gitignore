@@ -8,3 +8,4 @@ node_modules
 ward.toml
 test_secrets.txt
 secret.txt
+ward_test_playground/
