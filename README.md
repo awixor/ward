@@ -62,6 +62,28 @@ You can also run a scan manually without committing:
 ward scan
 ```
 
+## 🗑 Uninstallation
+
+To remove the Git hook:
+
+```bash
+# Run this in your repo root
+rm .git/hooks/pre-commit
+# Or if you have other hooks, edit .git/hooks/pre-commit and manually remove the ward lines
+```
+
+## 🤖 CI/CD Integration
+
+You can run Ward in your CI pipeline to prevent secrets from being merged.
+
+### GitHub Actions
+
+```yaml
+steps:
+  - uses: actions/checkout@v3
+  - run: npx git-ward scan
+```
+
 ## ⚙️ Configuration (`ward.toml`)
 
 Create a `ward.toml` in your project root to customize behavior:
@@ -86,6 +108,10 @@ secrets.txt
 generated/
 *.log
 ```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please open an issue or submit a PR on GitHub.
 
 ## License
 

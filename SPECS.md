@@ -43,7 +43,7 @@
 - **Language:** **Rust** (execution speed, safety, zero-dependency binaries).
 - **Distribution:**
   - **NPM Wrapper:** Primary distribution method (package name TBD, e.g., `@ward/cli` or similar).
-  - **Installation:** Manual `npx <package> init` required (no `postinstall` script).
+  - **Installation:** `npx <package> init` or `npm install -g <package>`. Source installs use `postinstall` for build.
 - **Git Integration:** Shell scripts calling the Rust binary.
 - **Pattern Matching:** `regex` crate + `entropy` calculation logic.
 - **Binary Size:** Optimized < 5MB.
@@ -92,8 +92,8 @@ regex = "^ID-[0-9]{10}$"
 
 ## 8. Success Criteria / Verification
 
-- [ ] Attempting to commit a 64-character hex string in a `.sol` file triggers a block.
-- [ ] `ward init` correctly prepends hook to an existing `.git/hooks/pre-commit` file.
-- [ ] Large binary files are skipped without error.
-- [ ] Minified JS files are skipped by entropy check if configured.
-- [ ] `git commit --no-verify` successfully bypasses the check.
+- [x] Attempting to commit a 64-character hex string in a `.sol` file triggers a block.
+- [x] `ward init` correctly prepends hook to an existing `.git/hooks/pre-commit` file.
+- [x] Large binary files are skipped without error.
+- [x] Minified JS files are skipped by entropy check if configured.
+- [x] `git commit --no-verify` successfully bypasses the check.
