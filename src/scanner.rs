@@ -68,6 +68,19 @@ impl Scanner {
 
         let mut violations = vec![];
 
+        // 0. File Name Check
+        if let Some(filename) = path.file_name().and_then(|s| s.to_str()) {
+            if filename == ".env" {
+                 violations.push(Violation {
+                    file: path.to_path_buf(),
+                    line: 1,
+                    rule: "Critical: .env file detected".to_string(),
+                    snippet: "Do not commit .env files. Use .env.example instead.".to_string(),
+                });
+                return Ok(violations);
+            }
+        }
+
         for (i, line) in content.lines().enumerate() {
             let line_idx = i + 1;
 
