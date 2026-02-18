@@ -2,7 +2,12 @@
 name = "ward"
 version = "0.1.0"
 edition = "2021"
-
+authors = ["Elhoucine Aouassar"]
+description = "Local-First Git Guard for preventing secret leaks"
+repository = "https://github.com/elhoucineaouassar/ward"
+license = "MIT"
+keywords = ["git", "secret-scanning", "security", "cli"]
+readme = "README.md"
 [dependencies]
 clap = { version = "4.4", features = ["derive"] }
 regex = "1.10"

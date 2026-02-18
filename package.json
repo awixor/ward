@@ -6,8 +6,32 @@
     "ward": "./bin/ward.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cargo build --release"
   },
-  "author": "",
-  "license": "MIT"
+  "keywords": [
+    "git",
+    "secret-scanning",
+    "security",
+    "cli",
+    "pre-commit",
+    "ward"
+  ],
+  "author": "Elhoucine Aouassar",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elhoucineaouassar/ward.git"
+  },
+  "bugs": {
+    "url": "https://github.com/elhoucineaouassar/ward/issues"
+  },
+  "homepage": "https://github.com/elhoucineaouassar/ward#readme",
+  "files": [
+    "bin",
+    "src",
+    "Cargo.toml",
+    "README.md",
+    "LICENSE"
+  ]
 }
