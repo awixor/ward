@@ -70,14 +70,20 @@ impl Scanner {
 
         // 0. File Name Check
         if let Some(filename) = path.file_name().and_then(|s| s.to_str()) {
-            if filename == ".env" {
-                 violations.push(Violation {
-                    file: path.to_path_buf(),
-                    line: 1,
-                    rule: "Critical: .env file detected".to_string(),
-                    snippet: "Do not commit .env files. Use .env.example instead.".to_string(),
-                });
-                return Ok(violations);
+            // Block .env and .env.* (e.g. .env.local, .env.production)
+            // But allow .env.example, .env.sample (common safe patterns)
+            if filename.starts_with(".env") {
+                let is_safe_example = filename.ends_with(".example") || filename.ends_with(".sample");
+                
+                if !is_safe_example {
+                     violations.push(Violation {
+                        file: path.to_path_buf(),
+                        line: 1,
+                        rule: format!("Critical: {} detected", filename),
+                        snippet: "Do not commit .env files. Use .env.example instead.".to_string(),
+                    });
+                    return Ok(violations);
+                }
             }
         }
 

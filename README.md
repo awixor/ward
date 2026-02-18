@@ -10,7 +10,7 @@
   - **Ethereum Private Keys**
   - **BIP-39 Mnemonics**
   - **Generic API Keys**
-  - **.env Files** (Blocked by filename)
+  - **.env Files** (Blocks `.env`, `.env.local`, etc. Allows `.example`/`.sample`)
   - **High Entropy Strings** (with false positive filtering)
 - **Configurable:** Ignore specific files via `.wardignore` or `ward.toml`.
 
