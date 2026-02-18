@@ -43,7 +43,7 @@
 - **Language:** **Rust** (execution speed, safety, zero-dependency binaries).
 - **Distribution:**
   - **NPM Wrapper:** Primary distribution method (package name TBD, e.g., `@ward/cli` or similar).
-  - **Installation:** `npx <package> init` or `npm install -g <package>`. Source installs use `postinstall` for build.
+  - **Installation:** Manual `npx <package> init` required (no `postinstall` script).
 - **Git Integration:** Shell scripts calling the Rust binary.
 - **Pattern Matching:** `regex` crate + `entropy` calculation logic.
 - **Binary Size:** Optimized < 5MB.
