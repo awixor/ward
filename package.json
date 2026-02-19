@@ -1,9 +1,10 @@
 {
   "name": "git-ward",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Local-First Git Guard for preventing secret leaks",
   "bin": {
-    "ward": "./bin/ward.js"
+    "ward": "./bin/ward.js",
+    "git-ward": "./bin/ward.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
