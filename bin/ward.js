@@ -22,7 +22,6 @@ const runArgs = [
 
 const child = spawn(command, runArgs, {
   stdio: "inherit",
-  shell: true,
 });
 
 child.on("exit", (code) => {
