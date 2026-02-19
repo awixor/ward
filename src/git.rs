@@ -14,6 +14,9 @@ else
     # Fallback to local npx if global command not found
     if [ -f "node_modules/.bin/ward" ]; then
         ./node_modules/.bin/ward scan
+    # Check if npx is available and try running via npx
+    elif command -v npx >/dev/null 2>&1; then
+        npx -y git-ward scan
     else
         echo "Ward not found in path or node_modules. Skipping scan."
     fi
