@@ -1,7 +1,7 @@
 # Ward (Local-First Git Guard)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/awixor/ward/main/assets/ward-logo.png" alt="Ward Logo" width="200" />
+  <img src="https://raw.githubusercontent.com/awixor/ward/main/assets/ward-logo-1.png" alt="Ward Logo" width="200" />
 </p>
 
 **Ward** is a high-performance, zero-server CLI tool and Git hook designed to prevent developers from accidentally pushing sensitive data (Private Keys, Mnemonics, API Keys) to GitHub.
