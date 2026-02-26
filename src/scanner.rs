@@ -114,11 +114,15 @@ impl Scanner {
                // Only check words/tokens > 20 chars
                for word in line.split_whitespace() {
                    // Clean common wrapping punctuation from the word
-                   let clean_word = word.trim_matches(|c| "()[]{}\";',".contains(c));
+                   let clean_word = word.trim_matches(|c| "()[]{}\";',`".contains(c));
                    
                    if clean_word.len() > 20 {
-                        // Skip if it looks like code function calls or paths
-                        if clean_word.contains("::") || clean_word.contains("->") {
+                        // Skip if it looks like code function calls, paths, or template literals
+                        if clean_word.contains("::") || 
+                           clean_word.contains("->") || 
+                           clean_word.contains("=>") || 
+                           clean_word.contains("${") || 
+                           clean_word.contains("</") {
                             continue;
                         }
 

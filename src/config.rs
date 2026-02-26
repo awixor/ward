@@ -28,7 +28,12 @@ fn default_threshold() -> f32 {
 impl Default for Config {
     fn default() -> Self {
         Self {
-            exclude: vec!["*.lock".to_string(), "package-lock.json".to_string(), "yarn.lock".to_string()],
+            exclude: vec![
+                "*.lock".to_string(),
+                "package-lock.json".to_string(),
+                "yarn.lock".to_string(),
+                "pnpm-lock.yaml".to_string(),
+            ],
             skip_entropy_checks: vec!["*.min.js".to_string(), "*.svg".to_string()],
             threshold: 4.5,
             rules: vec![],
