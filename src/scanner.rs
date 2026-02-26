@@ -1,6 +1,6 @@
 use crate::config::Config;
 use regex::Regex;
-use globset::{Glob, GlobSet, GlobSetBuilder};
+use ignore::gitignore::{Gitignore, GitignoreBuilder};
 // use std::fs; // Removed unused import
 use std::path::{Path, PathBuf};
 use std::collections::HashMap;
@@ -17,7 +17,7 @@ pub struct Violation {
 pub struct Scanner {
     config: Config,
     patterns: Vec<(String, Regex)>,
-    exclude_globnet: GlobSet,
+    exclude_globnet: Gitignore,
 }
 
 fn shannon_entropy(s: &str) -> f32 {
@@ -49,20 +49,18 @@ impl Scanner {
             }
         }
 
-        // Build GlobSet for excludes
-        let mut builder = GlobSetBuilder::new();
+        // Build Gitignore for excludes
+        let mut builder = GitignoreBuilder::new("");
         for pattern in &config.exclude {
-            if let Ok(glob) = Glob::new(pattern) {
-                builder.add(glob);
-            }
+            let _ = builder.add_line(None, pattern);
         }
-        let exclude_globnet = builder.build().unwrap_or_else(|_| GlobSet::empty());
+        let exclude_globnet = builder.build().unwrap_or_else(|_| Gitignore::empty());
 
         Self { config, patterns, exclude_globnet }
     }
 
     pub fn scan_content(&self, path: &Path, content: &str) -> Result<Vec<Violation>> {
-        if self.exclude_globnet.is_match(path) {
+        if self.exclude_globnet.matched_path_or_any_parents(path, false).is_ignore() {
             return Ok(vec![]);
         }
 
