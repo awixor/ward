@@ -144,7 +144,11 @@ impl Scanner {
                            clean_word.contains("->") || 
                            clean_word.contains("=>") || 
                            clean_word.contains("${") || 
-                           clean_word.contains("</") {
+                           clean_word.contains("</") ||
+                           clean_word.contains('.') ||
+                           clean_word.contains('(') ||
+                           clean_word.contains('<') ||
+                           clean_word.contains('[') {
                             continue;
                         }
 
